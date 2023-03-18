@@ -1,18 +1,19 @@
 package mg.inclusiv.mihary.entity;
 
 
-    import com.fasterxml.jackson.annotation.JsonIgnore;
-    import lombok.AllArgsConstructor;
-    import lombok.Data;
-    import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    import javax.persistence.*;
-    import java.io.Serializable;
-    import java.util.List;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
     @Entity
     @org.hibernate.annotations.Proxy(lazy=false)
     @Data
+
     @AllArgsConstructor
     @NoArgsConstructor
     @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -22,7 +23,7 @@ package mg.inclusiv.mihary.entity;
         @Id
         @Column(name="idUtilisateur", nullable=false, length=10)
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
+        private Long id;
 
         @Column(length = 12,nullable=false,unique = true)
         private String login;
@@ -30,17 +31,14 @@ package mg.inclusiv.mihary.entity;
         @Column(length = 32,nullable=false)
         private String mdpUtilisateur;
 
-        @Column(length = 50,nullable=false)
+        @Column(length = 50)
         private String nomUtilisateur;
 
-        @Column(length = 50,nullable=false)
+        @Column(length = 50)
         private String prenomUtilisateur;
 
-        @Column(length = 50,nullable=false)
+        @Column(length = 50)
         private String adresseUtilisateur;
-
-        @Column(length = 50,nullable=false)
-        private String contactUtilisateur;
 
         @Column(length = 50,nullable=false,unique = true)
         private String email;
@@ -58,7 +56,7 @@ package mg.inclusiv.mihary.entity;
         @Column(length = 17)
         private Long statCoop;
 
-        @Column(length = 20,nullable=false)
+        @Column(length = 20)
         private String telephoneUtilisateur;
 
         @Column(length = 50)
