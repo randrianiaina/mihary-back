@@ -1,8 +1,10 @@
 package mg.inclusiv.mihary.controller;
 
+import mg.inclusiv.mihary.entity.UserCreateRequest;
 import mg.inclusiv.mihary.entity.Utilisateur;
 import mg.inclusiv.mihary.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,9 +16,17 @@ public class UtilisateurController {
 
     private final UtilisateurService utilisateurService;
 
+
     @Autowired
     public UtilisateurController(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
+
+    }
+
+
+    @GetMapping("/restricted")
+    public String restrictedAccessEndpoint() {
+        return "Bienvenue, veuillez-vous authentifier, merci";
     }
 
     @GetMapping("/{id}")
@@ -24,23 +34,23 @@ public class UtilisateurController {
         return utilisateurService.findById(id);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<Utilisateur> findAll() {
         return utilisateurService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/ajout")
     public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur) {
         return utilisateurService.save(utilisateur);
     }
 
-    @PutMapping("/{id}")
-    public Utilisateur update(@PathVariable Integer id, @RequestBody @Valid Utilisateur utilisateur) {
+    @PutMapping("/modifier/{id}")
+    public Utilisateur update(@PathVariable Long id, @RequestBody @Valid Utilisateur utilisateur) {
         utilisateur.setId(id);
         return utilisateurService.save(utilisateur);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Integer id) {
         utilisateurService.deleteById(id);
     }
@@ -59,10 +69,15 @@ public class UtilisateurController {
     public List<Utilisateur> findAgriculteursByCooperativeId(@PathVariable Integer id) {
         return utilisateurService.findAgriculteursByCooperativeId(id);
     }
+    @PostMapping("/user")
+    public ResponseEntity createUser (@RequestBody UserCreateRequest userCreateRequest) {
+        utilisateurService.createUser(userCreateRequest);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/login/{login}")
-    public Utilisateur findByLogin(@PathVariable String login) {
-        return utilisateurService.findByLogin(login);
+    public Utilisateur readUserByUsername(@PathVariable String login) {
+        return utilisateurService.readUserByUsername(login);
     }
 
     @GetMapping("/email/{email}")
@@ -74,4 +89,8 @@ public class UtilisateurController {
     public Utilisateur updateSolde(@PathVariable Integer id, @RequestParam double montant) {
         return utilisateurService.updateSolde(id, montant);
     }
+
+
+
+
 }

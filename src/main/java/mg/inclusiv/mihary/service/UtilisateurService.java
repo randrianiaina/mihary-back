@@ -1,21 +1,24 @@
 package mg.inclusiv.mihary.service;
 
+import lombok.RequiredArgsConstructor;
+import mg.inclusiv.mihary.entity.UserCreateRequest;
 import mg.inclusiv.mihary.entity.Utilisateur;
 import mg.inclusiv.mihary.exception.UtilisateurNotFoundException;
 import mg.inclusiv.mihary.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class UtilisateurService {
-
-
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
@@ -30,6 +33,36 @@ public class UtilisateurService {
         } else {
             throw new ResourceNotFoundException("Utilisateur non trouvé avec l'ID : " + id);
         }
+    }
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    public Utilisateur readUserByUsername (String username) {
+        return utilisateurRepository.findByLogin(username).orElseThrow(EntityNotFoundException::new);
+    }
+    /* public Utilisateur readUserByUsername (String username) {
+         Optional<Utilisateur> optionalUtilisateur = utilisateurRepository.findByUsername(username);
+         if (optionalUtilisateur.isPresent()) {
+             return optionalUtilisateur.get();
+         } else {
+             throw new EntityNotFoundException("Utilisateur with username " + username + " not found.");
+         }
+     }
+  */
+    public void createUser(UserCreateRequest userCreateRequest) {
+        Utilisateur user = new Utilisateur();
+        //Utilisateur existingUser = utilisateurRepository.findByLogin(userCreateRequest.getLogin())
+          //      .orElse(null);
+        //if (existingUser != null) {
+        Optional<Utilisateur> byUsername = utilisateurRepository.findByLogin(userCreateRequest.getLogin());
+        if (byUsername.isPresent()) {
+            throw new RuntimeException("Utilisateur existant, veuillez choisir un autre nom.");
+        }
+
+        user.setLogin(userCreateRequest.getLogin());
+        user.setEmail(userCreateRequest.getEmailUtilisateur());
+        user.setTypeUtilisateur(userCreateRequest.getType());
+        user.setMdpUtilisateur(passwordEncoder.encode(userCreateRequest.getMdpUtilisateur()));
+        utilisateurRepository.save(user);
     }
 
     public Utilisateur save(Utilisateur utilisateur) {
@@ -57,7 +90,7 @@ public class UtilisateurService {
         return utilisateurRepository.findByCooperativeIdAndTypeUtilisateur(id, Utilisateur.TypeUtilisateur.AGRICULTEUR);
     }
 
-    public Utilisateur findByLogin(String login) {
+    public Optional<Utilisateur> findByLogin(String login) {
         return utilisateurRepository.findByLogin(login);
     }
 
