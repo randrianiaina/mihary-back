@@ -34,7 +34,7 @@ public class UtilisateurController {
         return utilisateurService.findById(id);
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List<Utilisateur> findAll() {
         return utilisateurService.findAll();
     }

@@ -59,6 +59,9 @@ public class UtilisateurService {
         }
 
         user.setLogin(userCreateRequest.getLogin());
+        user.setNomUtilisateur(userCreateRequest.getNom());
+        user.setPrenomUtilisateur(userCreateRequest.getPrenom());
+        user.setTelephoneUtilisateur(userCreateRequest.getTelephone());
         user.setEmail(userCreateRequest.getEmailUtilisateur());
         user.setTypeUtilisateur(userCreateRequest.getType());
         user.setMdpUtilisateur(passwordEncoder.encode(userCreateRequest.getMdpUtilisateur()));

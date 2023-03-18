@@ -21,6 +21,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationUserDetailService authenticationUserDetailService;
 
+
+
     @Override protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, AuthenticationConfigConstants.SIGN_UP_URL).permitAll()
