@@ -5,6 +5,7 @@ import mg.inclusiv.mihary.entity.Utilisateur;
 import mg.inclusiv.mihary.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,15 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/utilisateurs")
-public class UtilisateurController {
-
-    private final UtilisateurService utilisateurService;
-
+public class UtilisateurController {private final UtilisateurService utilisateurService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UtilisateurController(UtilisateurService utilisateurService) {
+    public UtilisateurController(UtilisateurService utilisateurService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.utilisateurService = utilisateurService;
-
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
@@ -34,13 +33,15 @@ public class UtilisateurController {
         return utilisateurService.findById(id);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<Utilisateur> findAll() {
         return utilisateurService.findAll();
     }
 
     @PostMapping("/ajout")
     public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur) {
+        String encodedPassword = bCryptPasswordEncoder.encode(utilisateur.getMdpUtilisateur());
+        utilisateur.setMdpUtilisateur(encodedPassword);
         return utilisateurService.save(utilisateur);
     }
 
@@ -69,6 +70,7 @@ public class UtilisateurController {
     public List<Utilisateur> findAgriculteursByCooperativeId(@PathVariable Integer id) {
         return utilisateurService.findAgriculteursByCooperativeId(id);
     }
+
     @PostMapping("/user")
     public ResponseEntity createUser (@RequestBody UserCreateRequest userCreateRequest) {
         utilisateurService.createUser(userCreateRequest);
@@ -89,8 +91,5 @@ public class UtilisateurController {
     public Utilisateur updateSolde(@PathVariable Integer id, @RequestParam double montant) {
         return utilisateurService.updateSolde(id, montant);
     }
-
-
-
 
 }

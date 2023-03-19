@@ -28,7 +28,7 @@ import java.util.List;
         @Column(length = 50,nullable=false,unique = true)
         private String login;
 
-        @Column(length = 32,nullable=false)
+        @Column(length = 100,nullable=false)
         private String mdpUtilisateur;
 
         @Column(length = 50)
@@ -86,7 +86,7 @@ import java.util.List;
         public enum TypeUtilisateur {
             COOPERATIVE,
             AGRICULTEUR,
-            CLIENT
+            CLIENT,ADMIN
         }
 
         @Enumerated(EnumType.STRING)

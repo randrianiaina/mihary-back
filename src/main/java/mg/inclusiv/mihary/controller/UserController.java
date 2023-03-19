@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/")
 public class UserController {
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -41,6 +42,8 @@ public class UserController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getEmail(), roles));
     }
+
+
 }
