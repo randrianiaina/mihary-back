@@ -1,6 +1,8 @@
 package mg.inclusiv.mihary.service;
 
 import mg.inclusiv.mihary.entity.Approvisionnement;
+import mg.inclusiv.mihary.entity.Produit;
+import mg.inclusiv.mihary.entity.Utilisateur;
 import mg.inclusiv.mihary.repository.ApprovisionnementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -25,6 +27,14 @@ public class ApprovisionnementService {
 
     public Approvisionnement saveApprovisionnement(Approvisionnement approvisionnement) {
         return approvisionnementRepository.save(approvisionnement);
+    }
+
+    public List<Approvisionnement> getApprovisionnementsByUtilisateur(Utilisateur utilisateur) {
+        return approvisionnementRepository.findByUtilisateur(utilisateur);
+    }
+
+    public List<Produit> getProduitsByApprovisionnement(Approvisionnement approvisionnement) {
+        return (List<Produit>) approvisionnement.getProduit();
     }
 
     public Approvisionnement updateApprovisionnement(Long id, Approvisionnement approvisionnementDetails) throws ResourceNotFoundException {
