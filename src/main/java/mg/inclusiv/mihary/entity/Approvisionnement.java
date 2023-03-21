@@ -20,11 +20,11 @@ public class Approvisionnement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idApprovisionnement;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "utilisateur_idUtilisateur",referencedColumnName = "idUtilisateur")
     private Utilisateur utilisateur;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "produit_idProduit",referencedColumnName = "idProduit")
     private Produit produit;
 

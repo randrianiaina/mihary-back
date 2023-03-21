@@ -61,7 +61,7 @@ public class ApprovisionnementController {
     }
 
     @GetMapping("/utilisateur/{utilisateurId}")
-    public List<Approvisionnement> getApprovisionnementsByUtilisateur(@PathVariable(value = "utilisateurId") Long utilisateurId) {
+    public List<Approvisionnement> getApprovisionnementsByUtilisateur(@PathVariable(value = "utilisateurId") Integer utilisateurId) {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setId(utilisateurId);
         return approvisionnementService.getApprovisionnementsByUtilisateur(utilisateur);

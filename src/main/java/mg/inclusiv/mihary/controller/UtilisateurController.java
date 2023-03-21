@@ -45,7 +45,7 @@ public class UtilisateurController {
     }
 
     @PutMapping("/modifier/{id}")
-    public Utilisateur update(@PathVariable Long id, @RequestBody @Valid Utilisateur utilisateur) {
+    public Utilisateur update(@PathVariable Integer id, @RequestBody @Valid Utilisateur utilisateur) {
         utilisateur.setId(id);
         return utilisateurService.save(utilisateur);
     }
