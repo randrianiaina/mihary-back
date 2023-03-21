@@ -2,6 +2,8 @@ package mg.inclusiv.mihary.controller;
 
 
 import mg.inclusiv.mihary.entity.Approvisionnement;
+import mg.inclusiv.mihary.entity.Produit;
+import mg.inclusiv.mihary.entity.Utilisateur;
 import mg.inclusiv.mihary.service.ApprovisionnementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -27,9 +29,8 @@ public class ApprovisionnementController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Approvisionnement> getApprovisionnementById(@PathVariable(value = "id") Long approvisionnementId)
-            throws ResourceNotFoundException {
-        Approvisionnement approvisionnement = approvisionnementService.getApprovisionnementById(approvisionnementId);
+    public ResponseEntity<Approvisionnement> getApprovisionnementById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        Approvisionnement approvisionnement = approvisionnementService.getApprovisionnementById(id);
         return ResponseEntity.ok().body(approvisionnement);
     }
 
@@ -39,19 +40,30 @@ public class ApprovisionnementController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Approvisionnement> updateApprovisionnement(@PathVariable(value = "id") Long approvisionnementId,
+    public ResponseEntity<Approvisionnement> updateApprovisionnement(@PathVariable(value = "id") Long id,
                                                                      @Valid @RequestBody Approvisionnement approvisionnementDetails) throws ResourceNotFoundException {
-        Approvisionnement updatedApprovisionnement = approvisionnementService.updateApprovisionnement(approvisionnementId, approvisionnementDetails);
+        Approvisionnement updatedApprovisionnement = approvisionnementService.updateApprovisionnement(id, approvisionnementDetails);
         return ResponseEntity.ok(updatedApprovisionnement);
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteApprovisionnement(@PathVariable(value = "id") Long approvisionnementId)
-            throws ResourceNotFoundException {
-        approvisionnementService.deleteApprovisionnement(approvisionnementId);
+    public Map<String, Boolean> deleteApprovisionnement(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        approvisionnementService.deleteApprovisionnement(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
     }
 
+    @GetMapping("/{id}/produits")
+    public List<Produit> getProduitsByApprovisionnement(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        Approvisionnement approvisionnement = approvisionnementService.getApprovisionnementById(id);
+        return approvisionnementService.getProduitsByApprovisionnement(approvisionnement);
+    }
+
+    @GetMapping("/utilisateur/{utilisateurId}")
+    public List<Approvisionnement> getApprovisionnementsByUtilisateur(@PathVariable(value = "utilisateurId") Long utilisateurId) {
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setId(utilisateurId);
+        return approvisionnementService.getApprovisionnementsByUtilisateur(utilisateur);
+    }
 }
