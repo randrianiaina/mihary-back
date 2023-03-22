@@ -19,12 +19,12 @@ public class ProduitController {
     @Autowired
     private ProduitRepository produitRepository;
 
-    @GetMapping("")
+    @GetMapping("/list")
     public List<Produit> getAllProduits() {
         return produitRepository.findAll();
     }
 
-    @PostMapping("")
+    @PostMapping("/ajouter")
     public Produit createProduit(@RequestBody Produit produit) {
         return produitRepository.save(produit);
     }
