@@ -12,6 +12,7 @@ import java.util.List;
 public class ApprovisionnementService {
 
     @Autowired
+
     private ApprovisionnementRepository approvisionnementRepository;
 
     public List<Approvisionnement> getAllApprovisionnements() {
@@ -26,6 +27,11 @@ public class ApprovisionnementService {
     public Approvisionnement saveApprovisionnement(Approvisionnement approvisionnement) {
         return approvisionnementRepository.save(approvisionnement);
     }
+
+    public List<Object[]> getAllApprovisionnementsWithProductName() {
+        return approvisionnementRepository.getAllApprovisionnementsWithProductName();
+    }
+
 
     public Approvisionnement updateApprovisionnement(Long id, Approvisionnement approvisionnementDetails) throws ResourceNotFoundException {
         Approvisionnement approvisionnement = approvisionnementRepository.findById(id)

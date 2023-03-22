@@ -1,5 +1,6 @@
 package mg.inclusiv.mihary.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,12 +21,14 @@ public class Approvisionnement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idApprovisionnement;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "utilisateur_idUtilisateur",referencedColumnName = "idUtilisateur")
+    @JoinColumn(name = "idUtilisateur",referencedColumnName = "idUtilisateur")
     private Utilisateur utilisateur;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "produit_idProduit",referencedColumnName = "idProduit")
+    @JoinColumn(name = "idProduit",referencedColumnName = "idProduit")
     private Produit produit;
 
     @Column(name="quantiteApprovisionnement", nullable=false)
