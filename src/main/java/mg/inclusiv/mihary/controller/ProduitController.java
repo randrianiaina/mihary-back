@@ -20,12 +20,12 @@ public class ProduitController {
     @Autowired
     private ProduitService produitService;
 
-    @GetMapping("")
+    @GetMapping("/list")
     public List<Produit> getAllProduits() {
         return produitService.getAllProduits();
     }
 
-    @PostMapping("")
+    @PostMapping("/ajouter")
     public Produit createProduit(@RequestBody Produit produit) {
         return produitService.addProduit(produit);
     }

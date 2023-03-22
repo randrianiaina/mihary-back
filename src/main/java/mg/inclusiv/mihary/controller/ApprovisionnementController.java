@@ -23,10 +23,18 @@ public class ApprovisionnementController {
     @Autowired
     private ApprovisionnementService approvisionnementService;
 
-    @GetMapping("")
-    public List<Approvisionnement> getAllApprovisionnements() {
-        return approvisionnementService.getAllApprovisionnements();
+    @GetMapping("/liste")
+    public List<Object[]> getAllApprovisionnementsWithProductName() {
+        return approvisionnementService.getAllApprovisionnementsWithProductName();
     }
+
+
+//    @GetMapping("/liste")
+//    public List<Approvisionnement> getAllApprovisionnements() {
+//        return approvisionnementService.getAllApprovisionnements();
+//    }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Approvisionnement> getApprovisionnementById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
@@ -34,7 +42,7 @@ public class ApprovisionnementController {
         return ResponseEntity.ok().body(approvisionnement);
     }
 
-    @PostMapping("")
+    @PostMapping("/add")
     public Approvisionnement createApprovisionnement(@Valid @RequestBody Approvisionnement approvisionnement) {
         return approvisionnementService.saveApprovisionnement(approvisionnement);
     }
