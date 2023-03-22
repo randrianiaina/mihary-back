@@ -22,25 +22,33 @@ public class Produit {
 
     @Column(length = 200,name = "descriptionProduit")
     private String descriptionProduit;
+
+    @Column(length = 50,name = "uniteProduit")
+    private String uniteProduit;
+
     @Column(name = "prixProduit")
     private BigDecimal prixProduit;
 
+    @Lob
     @Column(name = "photoProduit")
     private Blob photoProduit;
 
     @Column(name = "stockProduit" )
     private Integer stockProduit;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categorie_idCategorie")
-    private Categorie categorie;
+    @Column(name = "categorieProduit", length = 30)
+    private String categorieProduit;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "categorie_idCategorie")
+//    private Categorie categorie;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "produit",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "produit")
     private List<Approvisionnement> approvisionnements;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "produit",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "produit")
     private List<LigneCommande> lignesDeCommande;
 
     // Getters et setters

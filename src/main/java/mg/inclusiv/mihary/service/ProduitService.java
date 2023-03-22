@@ -22,8 +22,8 @@ public class ProduitService {
         return optionalProduit.orElse(null);
     }
 
-    public void addProduit(Produit produit) {
-        produitRepository.save(produit);
+    public Produit addProduit(Produit produit) {
+        return produitRepository.save(produit);
     }
 
     public void updateProduit(Produit produit) {

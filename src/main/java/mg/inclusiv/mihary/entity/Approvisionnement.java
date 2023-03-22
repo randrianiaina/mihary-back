@@ -21,14 +21,12 @@ public class Approvisionnement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idApprovisionnement;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUtilisateur",referencedColumnName = "idUtilisateur")
+    @ManyToOne()
+    @JoinColumn(name = "utilisateur_idUtilisateur",referencedColumnName = "idUtilisateur")
     private Utilisateur utilisateur;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idProduit",referencedColumnName = "idProduit")
+    @ManyToOne()
+    @JoinColumn(name = "produit_idProduit",referencedColumnName = "idProduit")
     private Produit produit;
 
     @Column(name="quantiteApprovisionnement", nullable=false)

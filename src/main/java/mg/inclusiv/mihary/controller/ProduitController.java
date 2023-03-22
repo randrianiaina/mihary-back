@@ -2,6 +2,7 @@ package mg.inclusiv.mihary.controller;
 
 import mg.inclusiv.mihary.entity.Produit;
 import mg.inclusiv.mihary.repository.ProduitRepository;
+import mg.inclusiv.mihary.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -17,50 +18,64 @@ import java.util.Map;
 public class ProduitController {
 
     @Autowired
-    private ProduitRepository produitRepository;
+    private ProduitService produitService;
 
     @GetMapping("/list")
     public List<Produit> getAllProduits() {
-        return produitRepository.findAll();
+        return produitService.getAllProduits();
     }
 
     @PostMapping("/ajouter")
     public Produit createProduit(@RequestBody Produit produit) {
-        return produitRepository.save(produit);
+        return produitService.addProduit(produit);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produit> getProduitById(@PathVariable(value = "id") Long produitId)
-            throws ResourceNotFoundException {
-        Produit produit = produitRepository.findById(produitId)
-                .orElseThrow(() -> new ResourceNotFoundException("Produit non trouvé pour cet identifiant :: " + produitId));
-        return ResponseEntity.ok().body(produit);
+    public ResponseEntity<Produit> getProduitById(@PathVariable(value = "id") Long produitId) throws ResourceNotFoundException {
+        Produit optionalProduit = produitService.getProduitById(produitId);
+        if (optionalProduit != null) {
+
+            return ResponseEntity.ok().body(optionalProduit);
+        } else {
+            throw new ResourceNotFoundException("Produit non trouvé pour cet identifiant :: " + produitId);
+        }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Produit> updateProduit(@PathVariable(value = "id") Long produitId,
                                                  @RequestBody Produit produitDetails) throws ResourceNotFoundException {
-        Produit produit = produitRepository.findById(produitId)
-                .orElseThrow(() -> new ResourceNotFoundException("Produit non trouvé pour cet identifiant :: " + produitId));
-
-        produit.setNomProduit(produitDetails.getNomProduit());
-        produit.setPrixProduit(produitDetails.getPrixProduit());
-        produit.setDescriptionProduit(produitDetails.getDescriptionProduit());
-        produit.setPhotoProduit(produitDetails.getPhotoProduit());
-        final Produit updatedProduit = produitRepository.save(produit);
-        return ResponseEntity.ok(updatedProduit);
+        Produit optionalProduit = produitService.getProduitById(produitId);
+        if(optionalProduit != null) {
+            Produit produit = optionalProduit;
+            produit.setNomProduit(produitDetails.getNomProduit());
+            produit.setPrixProduit(produitDetails.getPrixProduit());
+            produit.setCategorieProduit(produitDetails.getCategorieProduit());
+            produit.setUniteProduit(produitDetails.getUniteProduit());
+            produit.setStockProduit(produitDetails.getStockProduit());
+            produit.setDescriptionProduit(produitDetails.getDescriptionProduit());
+            produit.setPhotoProduit(produitDetails.getPhotoProduit());
+            final Produit updatedProduit = produitService.addProduit(produit);
+            return ResponseEntity.ok(updatedProduit);
+        } else {
+            throw new ResourceNotFoundException("Produit non trouvé pour cet identifiant :: " + produitId);
+        }
     }
 
     @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteProduit(@PathVariable(value = "id") Long produitId)
             throws ResourceNotFoundException {
-        Produit produit = produitRepository.findById(produitId)
-                .orElseThrow(() -> new ResourceNotFoundException("Produit non trouvé pour cet identifiant :: " + produitId));
+        Produit produit = produitService.getProduitById(produitId);
+        if (produit !=null) {
 
-        produitRepository.delete(produit);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+            produitService.deleteProduit(produit.getIdProduit());
+            Map<String, Boolean> response = new HashMap<>();
+            response.put("deleted", Boolean.TRUE);
+            return response;
+        } else {
+            throw new ResourceNotFoundException("Produit non trouvé pour cet identifiant :: " + produitId);
+        }
     }
+
 }
 
