@@ -40,6 +40,11 @@ public class ProduitController {
             throw new ResourceNotFoundException("Produit non trouvé pour cet identifiant :: " + produitId);
         }
     }
+    @GetMapping("/reference/{reference}")
+    public List<Produit> getProduitsByReference(@PathVariable(value = "reference") Integer reference) {
+        return produitService.findProduitsByReference(reference);
+    }
+
 
 
     @PutMapping("/{id}")

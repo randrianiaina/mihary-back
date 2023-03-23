@@ -39,8 +39,8 @@ public class Produit {
     @Column(name = "categorieProduit", length = 30)
     private String categorieProduit;
 
-    @Column(name = "referenceProduit", length = 30,unique = true)
-    private String referenceProduit;
+    @Column(name = "referenceProduit")
+    private Integer referenceProduit;
 
     @JsonIgnore
     @OneToMany(mappedBy = "produit")

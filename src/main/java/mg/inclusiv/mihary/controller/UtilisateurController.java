@@ -37,8 +37,6 @@ public class UtilisateurController {
 
     @PostMapping("/ajout")
     public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur) {
-        //String encodedPassword = bCryptPasswordEncoder.encode(utilisateur.getMdpUtilisateur());
-        //String encodedPassword = new BCryptPasswordEncoder().encode(utilisateur.getMdpUtilisateur());
         String encodedPassword = new BCryptPasswordEncoder().encode(utilisateur.getMdpUtilisateur());
         utilisateur.setMdpUtilisateur(encodedPassword);
         return utilisateurService.save(utilisateur);
@@ -84,6 +82,11 @@ public class UtilisateurController {
     @GetMapping("/email/{email}")
     public Utilisateur findByEmail(@PathVariable String email) {
         return utilisateurService.findByEmail(email);
+    }
+    @GetMapping("/agriculteurs/{idAgriculteur}/cooperative")
+    public ResponseEntity<Integer> getCooperativeIdByIdAgriculteur(@PathVariable Integer idAgriculteur) {
+        Integer cooperativeId = utilisateurService.findCooperativeIdByIdAgriculteur(idAgriculteur);
+        return ResponseEntity.ok(cooperativeId);
     }
 
     @PutMapping("/{id}/solde")
