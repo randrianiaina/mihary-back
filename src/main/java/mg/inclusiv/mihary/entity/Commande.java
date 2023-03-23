@@ -29,7 +29,7 @@ public class Commande {
     @OneToMany(mappedBy = "commande")
     private List<LigneCommande> lignesDeCommande;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "utilisateur_idUtilisateur")
     private Utilisateur utilisateur;
 

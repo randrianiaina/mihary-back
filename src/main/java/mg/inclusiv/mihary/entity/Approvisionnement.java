@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -36,7 +37,7 @@ public class Approvisionnement {
     private BigDecimal prixUnitaire;
 
     @Column(name="dateApprovisionnement", nullable=false)
-    private LocalDateTime dateApprovisionnement;
+    private LocalDate dateApprovisionnement;
 
     // Getters et setters
 }

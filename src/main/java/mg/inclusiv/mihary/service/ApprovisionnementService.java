@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -38,8 +40,15 @@ public class ApprovisionnementService {
         return approvisionnementRepository.findByUtilisateur(utilisateur);
     }
 
+    public List<Object[]> getAllApprovisionnementsWithUtilisateurId(Integer userId) {
+        return approvisionnementRepository.getAllApprovisionnementsWithUtilisateurId(userId);
+    }
     public List<Produit> getProduitsByApprovisionnement(Approvisionnement approvisionnement) {
         return (List<Produit>) approvisionnement.getProduit();
+    }
+
+    public List<Object[]> getAllApprovisionnementsWithProductNameByUserIdAndDate(Integer userId, LocalDate dateApprovisionnement) {
+        return approvisionnementRepository.getAllApprovisionnementsWithProductNameByUserIdAndDate(userId, dateApprovisionnement);
     }
 
     public Approvisionnement updateApprovisionnement(Long id, Approvisionnement approvisionnementDetails) throws ResourceNotFoundException {

@@ -68,6 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/approvisionnements/**").anonymous()
                 .antMatchers("/produits/**").anonymous()
                 .antMatchers("/paiements/**").anonymous()
+                .antMatchers("/ligne-commande/").anonymous()
                 .antMatchers("/ligne-commande/**").anonymous()
                 .antMatchers("/deals/**").anonymous()
                 .antMatchers("/commentaires/**").anonymous()

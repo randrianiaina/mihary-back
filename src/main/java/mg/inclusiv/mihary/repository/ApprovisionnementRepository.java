@@ -5,8 +5,11 @@ import mg.inclusiv.mihary.entity.Produit;
 import mg.inclusiv.mihary.entity.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -18,7 +21,21 @@ public interface ApprovisionnementRepository extends JpaRepository<Approvisionne
                 "INNER JOIN a.produit p";
         @Query(query)
         List<Object[]> getAllApprovisionnementsWithProductName();
-public interface ApprovisionnementRepository extends JpaRepository<Approvisionnement, Long> {
+    @Query("SELECT a.quantiteApprovisionnement, a.dateApprovisionnement, a.prixUnitaire, u.nomUtilisateur, p.nomProduit " +
+            "FROM Approvisionnement a " +
+            "INNER JOIN a.utilisateur u " +
+            "INNER JOIN a.produit p " +
+            "WHERE u.id = :userId")
+    List<Object[]> getAllApprovisionnementsWithUtilisateurId(@Param("userId") Integer userId);
+    @Query("SELECT a.quantiteApprovisionnement, a.dateApprovisionnement, a.prixUnitaire, u.nomUtilisateur, p.nomProduit " +
+            "FROM Approvisionnement a " +
+            "INNER JOIN a.utilisateur u " +
+            "INNER JOIN a.produit p " +
+            "WHERE u.id = :userId AND a.dateApprovisionnement = :dateApprovisionnement")
+    List<Object[]> getAllApprovisionnementsWithProductNameByUserIdAndDate(@Param("userId") Integer userId, @Param("dateApprovisionnement") LocalDate dateApprovisionnement);
+
+
+
     List<Approvisionnement> findByUtilisateur(Utilisateur utilisateur);
     List<Approvisionnement> findByProduit(Produit produit);
 
