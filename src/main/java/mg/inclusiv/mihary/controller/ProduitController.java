@@ -1,7 +1,6 @@
 package mg.inclusiv.mihary.controller;
 
 import mg.inclusiv.mihary.entity.Produit;
-import mg.inclusiv.mihary.repository.ProduitRepository;
 import mg.inclusiv.mihary.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
