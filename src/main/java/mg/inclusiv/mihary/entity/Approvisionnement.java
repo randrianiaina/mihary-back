@@ -1,11 +1,13 @@
 package mg.inclusiv.mihary.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,11 +22,11 @@ public class Approvisionnement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idApprovisionnement;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "utilisateur_idUtilisateur",referencedColumnName = "idUtilisateur")
     private Utilisateur utilisateur;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "produit_idProduit",referencedColumnName = "idProduit")
     private Produit produit;
 
@@ -35,7 +37,7 @@ public class Approvisionnement {
     private BigDecimal prixUnitaire;
 
     @Column(name="dateApprovisionnement", nullable=false)
-    private LocalDateTime dateApprovisionnement;
+    private LocalDate dateApprovisionnement;
 
     // Getters et setters
 }

@@ -3,6 +3,7 @@ package mg.inclusiv.mihary.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +24,7 @@ public class Commentaire {
     private String detailsCommentaire;
 
     @Column(name = "dateCommentaire")
-    private LocalDateTime dateCommentaire;
+    private LocalDate dateCommentaire;
 
     // Getters et setters
 }

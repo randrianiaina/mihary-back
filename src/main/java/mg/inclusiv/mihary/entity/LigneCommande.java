@@ -14,11 +14,11 @@ public class LigneCommande {
     @Column(name = "idLigneCommande")
     private Long idLigneCommande;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "commande_idUtilisateur")
+    @ManyToOne()
+    @JoinColumn(name = "commande_idCommande")
     private Commande commande;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "produit_idProduit")
     private Produit produit;
 

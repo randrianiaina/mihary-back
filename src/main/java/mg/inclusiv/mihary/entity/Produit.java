@@ -44,11 +44,11 @@ public class Produit {
 //    private Categorie categorie;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "produit",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "produit")
     private List<Approvisionnement> approvisionnements;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "produit",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "produit")
     private List<LigneCommande> lignesDeCommande;
 
     // Getters et setters

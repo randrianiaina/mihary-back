@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -23,7 +24,7 @@ public class Deal {
     private Utilisateur utilisateur;
 
     @Column(name = "dateDeal")
-    private Date dateDeal;
+    private LocalDate dateDeal;
 
     @Column(name = "montantDeal")
     private Double montantDeal;

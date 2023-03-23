@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
 @Entity
@@ -30,7 +31,7 @@ public class Paiement {
     private String statutPaiement;
 
     @Column(name = "datePaiement")
-    private LocalDateTime datePaiement;
+    private LocalDate datePaiement;
 
     // Getters et setters
 }

@@ -23,7 +23,7 @@ import java.util.List;
         @Id
         @Column(name="idUtilisateur", nullable=false, length=10)
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+        private Integer id;
 
         @Column(length = 50,nullable=false,unique = true)
         private String login;
@@ -79,7 +79,7 @@ import java.util.List;
         private List<Utilisateur> agriculteurs;
 
         @JsonIgnore
-        @OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "utilisateur")
         @org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)
         private List<Commande> commandes;
 

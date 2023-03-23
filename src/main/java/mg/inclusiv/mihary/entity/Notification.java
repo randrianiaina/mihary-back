@@ -4,6 +4,7 @@ package mg.inclusiv.mihary.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -26,7 +27,7 @@ import java.time.LocalDateTime;
         private Boolean lu;
 
         @Column(name = "dateNotification")
-        private LocalDateTime dateNotification;
+        private LocalDate dateNotification;
 
         // Getters et setters
     }

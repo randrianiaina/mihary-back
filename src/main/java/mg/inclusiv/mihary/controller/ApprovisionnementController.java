@@ -7,10 +7,13 @@ import mg.inclusiv.mihary.entity.Utilisateur;
 import mg.inclusiv.mihary.service.ApprovisionnementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +26,20 @@ public class ApprovisionnementController {
     @Autowired
     private ApprovisionnementService approvisionnementService;
 
-    @GetMapping("")
-    public List<Approvisionnement> getAllApprovisionnements() {
-        return approvisionnementService.getAllApprovisionnements();
+    @GetMapping("/liste")
+    public List<Object[]> getAllApprovisionnementsWithProductName() {
+        return approvisionnementService.getAllApprovisionnementsWithProductName();
+    }
+    @GetMapping("/agriculteur/{id}")
+    public ResponseEntity<List<Object[]>> getAllApprovisionnementsWithUtilisateurId(@PathVariable(value = "id") Integer userId) {
+        List<Object[]> approvisionnements = approvisionnementService.getAllApprovisionnementsWithUtilisateurId(userId);
+        return ResponseEntity.ok(approvisionnements);
+    }
+
+    @GetMapping("/agriculteurs/{id}/{date}")
+    public ResponseEntity<List<Object[]>> getAllApprovisionnementsWithProductNameByUserIdAndDate(@PathVariable("id") Integer userId, @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateApprovisionnement) {
+        List<Object[]> approvisionnements = approvisionnementService.getAllApprovisionnementsWithProductNameByUserIdAndDate(userId, dateApprovisionnement);
+        return ResponseEntity.ok(approvisionnements);
     }
 
     @GetMapping("/{id}")
@@ -33,8 +47,7 @@ public class ApprovisionnementController {
         Approvisionnement approvisionnement = approvisionnementService.getApprovisionnementById(id);
         return ResponseEntity.ok().body(approvisionnement);
     }
-
-    @PostMapping("")
+    @PostMapping("/add")
     public Approvisionnement createApprovisionnement(@Valid @RequestBody Approvisionnement approvisionnement) {
         return approvisionnementService.saveApprovisionnement(approvisionnement);
     }
@@ -61,7 +74,7 @@ public class ApprovisionnementController {
     }
 
     @GetMapping("/utilisateur/{utilisateurId}")
-    public List<Approvisionnement> getApprovisionnementsByUtilisateur(@PathVariable(value = "utilisateurId") Long utilisateurId) {
+    public List<Approvisionnement> getApprovisionnementsByUtilisateur(@PathVariable(value = "utilisateurId") Integer utilisateurId) {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setId(utilisateurId);
         return approvisionnementService.getApprovisionnementsByUtilisateur(utilisateur);

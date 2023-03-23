@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 @Service
@@ -19,7 +20,7 @@ public class NotificationService {
     }
 
     public Notification createNotification(Notification notification) {
-        notification.setDateNotification(LocalDateTime.now());
+        notification.setDateNotification(LocalDate.now());
         notification.setLu(false);
         return notificationRepository.save(notification);
     }
