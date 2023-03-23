@@ -88,6 +88,11 @@ public class UtilisateurService {
             throw new ResourceNotFoundException("Utilisateur non trouvé avec l'ID : " + id);
         }
     }
+    public Integer findCooperativeIdByIdAgriculteur(Integer idAgriculteur) {
+        Utilisateur agriculteur = utilisateurRepository.findByIdAndTypeUtilisateur(idAgriculteur, Utilisateur.TypeUtilisateur.AGRICULTEUR);
+        return agriculteur.getCooperative().getId();
+    }
+
 
     public List<Utilisateur> findAllCooperatives() {
         return utilisateurRepository.findByTypeUtilisateur(Utilisateur.TypeUtilisateur.COOPERATIVE);

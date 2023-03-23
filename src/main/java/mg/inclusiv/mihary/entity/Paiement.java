@@ -17,7 +17,7 @@ public class Paiement {
     private Long refPaiement;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "commande_idCommande")
     private Commande commande;
 

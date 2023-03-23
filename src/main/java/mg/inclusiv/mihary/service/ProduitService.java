@@ -22,6 +22,10 @@ public class ProduitService {
         return optionalProduit.orElse(null);
     }
 
+    public List<Produit> findProduitsByReference(Integer reference) {
+        return produitRepository.findByReferenceProduit(reference);
+    }
+
     public Produit addProduit(Produit produit) {
         return produitRepository.save(produit);
     }

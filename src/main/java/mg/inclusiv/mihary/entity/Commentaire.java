@@ -15,7 +15,7 @@ public class Commentaire {
     @Column(name = "idCommentaire")
     private Long idCommentaire;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "utilisateur_idUtilisateur")
     private Utilisateur utilisateur;
 

@@ -39,9 +39,8 @@ public class Produit {
     @Column(name = "categorieProduit", length = 30)
     private String categorieProduit;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "categorie_idCategorie")
-//    private Categorie categorie;
+    @Column(name = "referenceProduit")
+    private Integer referenceProduit;
 
     @JsonIgnore
     @OneToMany(mappedBy = "produit")
