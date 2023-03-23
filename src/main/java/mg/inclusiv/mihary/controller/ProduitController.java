@@ -25,7 +25,7 @@ public class ProduitController {
         return produitService.getAllProduits();
     }
 
-    @PostMapping("/ajouter")
+    @PostMapping("/ajout")
     public Produit createProduit(@RequestBody Produit produit) {
         return produitService.addProduit(produit);
     }
