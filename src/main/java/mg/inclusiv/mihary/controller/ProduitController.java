@@ -41,7 +41,7 @@ public class ProduitController {
         }
     }
     @GetMapping("/reference/{reference}")
-    public List<Produit> getProduitsByReference(@PathVariable(value = "reference") Integer reference) {
+    public List<Produit> getProduitsByReference(@PathVariable(value = "reference") Integer reference) throws ResourceNotFoundException {
         return produitService.findProduitsByReference(reference);
     }
 
