@@ -6,13 +6,17 @@ import mg.inclusiv.mihary.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @CrossOrigin
+@Transactional
 @RequestMapping("/api/utilisateurs")
 public class UtilisateurController {
 
@@ -36,17 +40,18 @@ public class UtilisateurController {
     }
 
     @PostMapping("/ajout")
-    public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur) {
+    public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur, @RequestParam(required = false) MultipartFile photo) throws IOException {
         String encodedPassword = new BCryptPasswordEncoder().encode(utilisateur.getMdpUtilisateur());
         utilisateur.setMdpUtilisateur(encodedPassword);
-        return utilisateurService.save(utilisateur);
+        return utilisateurService.save(utilisateur, photo);
     }
 
     @PutMapping("/modifier/{id}")
     public Utilisateur update(@PathVariable Integer id, @RequestBody @Valid Utilisateur utilisateur) {
         utilisateur.setId(id);
-        return utilisateurService.save(utilisateur);
+        return utilisateurService.update(utilisateur);
     }
+
 
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Integer id) {
