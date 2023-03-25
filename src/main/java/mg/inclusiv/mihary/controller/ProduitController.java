@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import mg.inclusiv.mihary.entity.Produit;
-
 import mg.inclusiv.mihary.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;

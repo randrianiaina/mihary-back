@@ -31,6 +31,7 @@ public class AuthController {
 
     @Autowired
     private JwtToken jwtToken;
+	//test
 
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
