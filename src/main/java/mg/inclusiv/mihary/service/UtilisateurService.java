@@ -10,8 +10,10 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,9 +78,18 @@ public class UtilisateurService {
         utilisateurRepository.save(user);
     }
 
-    public Utilisateur save(Utilisateur utilisateur) {
+    public Utilisateur  save(Utilisateur utilisateur, MultipartFile photo) throws IOException {
+        if (photo != null && !photo.isEmpty()) {
+            utilisateur.setPhotoUtilisateur(photo.getBytes());
+        }
         return utilisateurRepository.save(utilisateur);
     }
+    public Utilisateur  update(Utilisateur utilisateur){
+
+        return utilisateurRepository.save(utilisateur);
+    }
+
+
 
     public void deleteById(Integer id) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(id);
