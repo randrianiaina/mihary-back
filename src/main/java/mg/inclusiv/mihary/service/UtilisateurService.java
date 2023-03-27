@@ -78,10 +78,10 @@ public class UtilisateurService {
         utilisateurRepository.save(user);
     }
 
-    public Utilisateur  save(Utilisateur utilisateur, MultipartFile photo) throws IOException {
-        if (photo != null && !photo.isEmpty()) {
-            utilisateur.setPhotoUtilisateur(photo.getBytes());
-        }
+    public Utilisateur  save(Utilisateur utilisateur) throws IOException {
+//        if (photo != null && !photo.isEmpty()) {
+//            utilisateur.setPhotoUtilisateur(photo.getBytes());
+//        }
         return utilisateurRepository.save(utilisateur);
     }
     public Utilisateur  update(Utilisateur utilisateur){
