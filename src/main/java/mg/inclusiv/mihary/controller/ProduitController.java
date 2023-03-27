@@ -44,7 +44,10 @@ public class ProduitController {
         return produitService.findProduitsByReference(reference);
     }
 
-
+    @GetMapping("/count")
+    public Long getProductsCount() {
+        return produitService.getProduitsCount();
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Produit> updateProduit(@PathVariable(value = "id") Long produitId,
