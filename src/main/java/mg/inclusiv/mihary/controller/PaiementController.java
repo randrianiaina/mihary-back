@@ -23,7 +23,7 @@ public class PaiementController {
         return paiementService.getAllPaiements();
     }
 
-    @PostMapping("")
+    @PostMapping("/valider")
     public ResponseEntity<Paiement> createPaiement(@RequestBody Paiement paiement) {
         Paiement newPaiement = paiementService.createPaiement(paiement);
         return ResponseEntity.status(HttpStatus.CREATED).body(newPaiement);

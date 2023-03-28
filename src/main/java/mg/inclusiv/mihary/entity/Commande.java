@@ -30,7 +30,7 @@ public class Commande {
     private List<LigneCommande> lignesDeCommande;
 
     @ManyToOne()
-    @JoinColumn(name = "utilisateur_idUtilisateur")
+    @JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;
 
     @JsonIgnore

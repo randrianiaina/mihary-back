@@ -32,6 +32,7 @@ public class PaiementService {
         return nouveauPaiement;
     }
 
+
     public Paiement getPaiementById(Long paiementId) throws ResourceNotFoundException {
         return paiementRepository.findById(paiementId)
                 .orElseThrow(() -> new ResourceNotFoundException("Paiement non trouvé pour cet identifiant :: " + paiementId));

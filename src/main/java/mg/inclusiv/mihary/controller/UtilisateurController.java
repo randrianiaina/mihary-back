@@ -43,6 +43,9 @@ public class UtilisateurController {
     public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur) {
         String encodedPassword = new BCryptPasswordEncoder().encode(utilisateur.getMdpUtilisateur());
         utilisateur.setMdpUtilisateur(encodedPassword);
+        //String test = utilisateur.getCinAgriculteur().toString();
+
+        //System.out.println("TEST ID COOP:" + test);
         return utilisateurService.save(utilisateur);
     }
 
