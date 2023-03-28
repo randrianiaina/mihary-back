@@ -21,7 +21,7 @@ public class CommandeController {
     @Autowired
     private CommandeService commandeService;
 
-    @PostMapping("")
+    @PostMapping("/ajout")
     public ResponseEntity<Commande> createCommande(@Valid @RequestBody Commande commande) {
         Commande newCommande = commandeService.createCommande(commande);
         return ResponseEntity.ok(newCommande);
