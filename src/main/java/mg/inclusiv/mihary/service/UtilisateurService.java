@@ -10,10 +10,8 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +58,7 @@ public class UtilisateurService {
     public void createUser(UserCreateRequest userCreateRequest) {
         Utilisateur user = new Utilisateur();
         //Utilisateur existingUser = utilisateurRepository.findByLogin(userCreateRequest.getLogin())
-          //      .orElse(null);
+        //      .orElse(null);
         //if (existingUser != null) {
         Utilisateur byUsername = utilisateurRepository.findByLogin(userCreateRequest.getLogin());
         if (byUsername !=null) {
@@ -78,18 +76,9 @@ public class UtilisateurService {
         utilisateurRepository.save(user);
     }
 
-    public Utilisateur  save(Utilisateur utilisateur, MultipartFile photo) throws IOException {
-        if (photo != null && !photo.isEmpty()) {
-            utilisateur.setPhotoUtilisateur(photo.getBytes());
-        }
+    public Utilisateur save(Utilisateur utilisateur) {
         return utilisateurRepository.save(utilisateur);
     }
-    public Utilisateur  update(Utilisateur utilisateur){
-
-        return utilisateurRepository.save(utilisateur);
-    }
-
-
 
     public void deleteById(Integer id) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(id);
@@ -154,8 +143,8 @@ public class UtilisateurService {
     public Utilisateur login(String username, String password) {
         Utilisateur utilisateur = readUserByUsername(username);
         if (!passwordEncoder.matches(password, utilisateur.getMdpUtilisateur())) {
-          throw new RuntimeException("Mot de passe incorrect pour l'utilisateur avec le login : " + username);
-       }
+            throw new RuntimeException("Mot de passe incorrect pour l'utilisateur avec le login : " + username);
+        }
 //        if (password != utilisateur.getMdpUtilisateur()) {
 //            throw new RuntimeException("Mot de passe incorrect pour l'utilisateur avec le login : " + username);
 //        }

@@ -40,16 +40,16 @@ public class UtilisateurController {
     }
 
     @PostMapping("/ajout")
-    public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur, @RequestParam(required = false) MultipartFile photo) throws IOException {
+    public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur) {
         String encodedPassword = new BCryptPasswordEncoder().encode(utilisateur.getMdpUtilisateur());
         utilisateur.setMdpUtilisateur(encodedPassword);
-        return utilisateurService.save(utilisateur, photo);
+        return utilisateurService.save(utilisateur);
     }
 
     @PutMapping("/modifier/{id}")
     public Utilisateur update(@PathVariable Integer id, @RequestBody @Valid Utilisateur utilisateur) {
         utilisateur.setId(id);
-        return utilisateurService.update(utilisateur);
+        return utilisateurService.save(utilisateur);
     }
 
 
