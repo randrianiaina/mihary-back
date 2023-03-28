@@ -35,6 +35,11 @@ public class ApprovisionnementController {
         List<Object[]> approvisionnements = approvisionnementService.getAllApprovisionnementsWithUtilisateurId(userId);
         return ResponseEntity.ok(approvisionnements);
     }
+    @GetMapping("/cooperative/{id}")
+    public ResponseEntity<List<Object[]>> getAllApprovisionnementsWithCooperativeId(@PathVariable(value = "id") Integer userId) {
+        List<Object[]> approvisionnements = approvisionnementService.getAllApprovisionnementsWithCooperativeId(userId);
+        return ResponseEntity.ok(approvisionnements);
+    }
 
     @GetMapping("/agriculteurs/{id}/{date}")
     public ResponseEntity<List<Object[]>> getAllApprovisionnementsWithProductNameByUserIdAndDate(@PathVariable("id") Integer userId, @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateApprovisionnement) {

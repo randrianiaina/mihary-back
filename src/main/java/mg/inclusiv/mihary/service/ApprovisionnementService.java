@@ -43,6 +43,9 @@ public class ApprovisionnementService {
     public List<Object[]> getAllApprovisionnementsWithUtilisateurId(Integer userId) {
         return approvisionnementRepository.getAllApprovisionnementsWithUtilisateurId(userId);
     }
+    public List<Object[]> getAllApprovisionnementsWithCooperativeId(Integer userId) {
+        return approvisionnementRepository.getAllApprovisionnementsWithCooperativeId(userId);
+    }
     public List<Produit> getProduitsByApprovisionnement(Approvisionnement approvisionnement) {
         return (List<Produit>) approvisionnement.getProduit();
     }

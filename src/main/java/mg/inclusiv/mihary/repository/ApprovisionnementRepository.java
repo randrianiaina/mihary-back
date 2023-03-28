@@ -27,6 +27,12 @@ public interface ApprovisionnementRepository extends JpaRepository<Approvisionne
             "INNER JOIN a.produit p " +
             "WHERE u.id = :userId")
     List<Object[]> getAllApprovisionnementsWithUtilisateurId(@Param("userId") Integer userId);
+    @Query("SELECT a.quantiteApprovisionnement ,a.dateApprovisionnement, a.prixUnitaire, u.nomUtilisateur, p.nomProduit " +
+            "FROM Approvisionnement a " +
+            "INNER JOIN a.utilisateur u " +
+            "INNER JOIN a.produit p " +
+            "WHERE u.cooperative.id = :userId")
+    List<Object[]> getAllApprovisionnementsWithCooperativeId(@Param("userId") Integer userId);
     @Query("SELECT a.quantiteApprovisionnement, a.dateApprovisionnement, a.prixUnitaire, u.nomUtilisateur, p.nomProduit " +
             "FROM Approvisionnement a " +
             "INNER JOIN a.utilisateur u " +
