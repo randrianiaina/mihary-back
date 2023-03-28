@@ -1,14 +1,17 @@
 package mg.inclusiv.mihary.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Blob;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "produit")
 public class Produit {
@@ -31,7 +34,7 @@ public class Produit {
 
     @Lob
     @Column(name = "photoProduit")
-    private Blob photoProduit;
+    private byte[] photoProduit;
 
     @Column(name = "stockProduit" )
     private Integer stockProduit;
@@ -49,6 +52,17 @@ public class Produit {
     @JsonIgnore
     @OneToMany(mappedBy = "produit")
     private List<LigneCommande> lignesDeCommande;
+
+    public Produit(String nomProduit, BigDecimal prixProduit, String categorieProduit, String uniteProduit, int stockProduit, String descriptionProduit, byte[] bytes, int referenceProduit) {
+        this.nomProduit=nomProduit;
+        this.prixProduit=prixProduit;
+        this.categorieProduit=categorieProduit;
+        this.uniteProduit=uniteProduit;
+        this.stockProduit=stockProduit;
+        this.descriptionProduit=descriptionProduit;
+        this.photoProduit=bytes;
+        this.referenceProduit=referenceProduit;
+    }
 
     // Getters et setters
 }
