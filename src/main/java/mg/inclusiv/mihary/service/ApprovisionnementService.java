@@ -9,7 +9,6 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -34,6 +33,10 @@ public class ApprovisionnementService {
 
     public List<Object[]> getAllApprovisionnementsWithProductName() {
         return approvisionnementRepository.getAllApprovisionnementsWithProductName();
+    }
+
+    public List<Approvisionnement> getAllApprovisionnementsWithProductIdAndUserId(Integer userId, Long productId) {
+        return approvisionnementRepository.getAllApprovisionnementsWithProductIdAndUserId(userId,productId);
     }
 
     public List<Approvisionnement> getApprovisionnementsByUtilisateur(Utilisateur utilisateur) {

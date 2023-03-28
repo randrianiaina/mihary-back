@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -45,5 +44,13 @@ public interface ApprovisionnementRepository extends JpaRepository<Approvisionne
     List<Approvisionnement> findByUtilisateur(Utilisateur utilisateur);
     List<Approvisionnement> findByProduit(Produit produit);
 
+
+    @Query("SELECT a FROM Approvisionnement a " +
+            "JOIN a.produit p " +
+            "JOIN a.utilisateur u " +
+            "JOIN u.cooperative c " +
+            "WHERE p.idProduit = :idProduit " +
+            "AND c.id = :idCooperative")
+    List<Approvisionnement>getAllApprovisionnementsWithProductIdAndUserId (@Param("idCooperative") Integer idCooperative,@Param("idProduit") Long idProduit);
 
 }
