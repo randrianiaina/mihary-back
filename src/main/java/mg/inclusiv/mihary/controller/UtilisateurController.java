@@ -43,6 +43,9 @@ public class UtilisateurController {
     public Utilisateur create(@RequestBody @Valid Utilisateur utilisateur) {
         String encodedPassword = new BCryptPasswordEncoder().encode(utilisateur.getMdpUtilisateur());
         utilisateur.setMdpUtilisateur(encodedPassword);
+        if(utilisateur.getSoldeUtilisateur()==null) {
+            utilisateur.setSoldeUtilisateur(0.00);
+        }
         return utilisateurService.save(utilisateur);
     }
 
