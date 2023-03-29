@@ -43,4 +43,8 @@ public class CommandeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Commande not found for this id :: " + commandeId));
         commandeRepository.delete(commande);
     }
+
+    public List<Object[]> getCommandeDetails(Integer userId, Long produitId) {
+        return commandeRepository.findCommandeDetails(userId, produitId);
+    }
 }

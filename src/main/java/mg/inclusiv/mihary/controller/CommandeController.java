@@ -21,6 +21,16 @@ public class CommandeController {
     @Autowired
     private CommandeService commandeService;
 
+    @GetMapping("/{userId}/{produitId}")
+    public ResponseEntity<List<Object[]>> getCommandeDetails(
+            @PathVariable Integer userId,
+            @PathVariable Long produitId
+    ) {
+        List<Object[]> commandeDetails = commandeService.getCommandeDetails(userId, produitId);
+        return ResponseEntity.ok(commandeDetails);
+    }
+
+
     @PostMapping("/ajout")
     public ResponseEntity<Commande> createCommande(@Valid @RequestBody Commande commande) {
         Commande newCommande = commandeService.createCommande(commande);
