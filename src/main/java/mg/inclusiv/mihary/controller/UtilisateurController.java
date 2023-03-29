@@ -97,8 +97,8 @@ public class UtilisateurController {
         return ResponseEntity.ok(cooperativeId);
     }
 
-    @PutMapping("/{id}/solde")
-    public Utilisateur updateSolde(@PathVariable Integer id, @RequestParam double montant) {
+    @PutMapping("/{id}/{montant}")
+    public Utilisateur updateSolde(@PathVariable Integer id, @PathVariable double montant) {
         return utilisateurService.updateSolde(id, montant);
     }
 
