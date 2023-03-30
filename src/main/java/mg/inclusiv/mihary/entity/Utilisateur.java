@@ -13,11 +13,9 @@ import java.util.List;
     @Entity
     @org.hibernate.annotations.Proxy(lazy=false)
     @Data
-
     @AllArgsConstructor
     @NoArgsConstructor
     @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-
     @Table(name = "utilisateur")
     public class Utilisateur implements Serializable {
         @Id

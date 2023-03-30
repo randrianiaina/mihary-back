@@ -87,4 +87,8 @@ public class ApprovisionnementController {
         utilisateur.setId(utilisateurId);
         return approvisionnementService.getApprovisionnementsByUtilisateur(utilisateur);
     }
+    @GetMapping("/{userId}/{startDate}/{endDate}")
+    public List<Object[]> getAllApprovisionnementsWithProductNameByUserIdAndDateInter(@PathVariable Integer userId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        return approvisionnementService.getAllApprovisionnementsWithProductNameByUserIdAndDateInter(userId, startDate, endDate);
+    }
 }

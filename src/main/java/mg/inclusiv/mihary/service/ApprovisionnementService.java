@@ -75,4 +75,7 @@ public class ApprovisionnementService {
                 .orElseThrow(() -> new ResourceNotFoundException("Approvisionnement introuvable avec l'id : " + id));
         approvisionnementRepository.delete(approvisionnement);
     }
+    public List<Object[]> getAllApprovisionnementsWithProductNameByUserIdAndDateInter(Integer userId, LocalDate startDate, LocalDate endDate) {
+        return approvisionnementRepository.getAllApprovisionnementsWithProductNameByUserIdAndDateInter(userId, startDate, endDate);
+    }
 }
