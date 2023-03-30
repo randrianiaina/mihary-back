@@ -16,7 +16,7 @@ public class LigneCommandeController {
     @Autowired
     private LigneCommandeService ligneCommandeService;
 
-    @GetMapping("")
+    @GetMapping("list")
     public List<LigneCommande> getAllLigneCommandes() {
         return ligneCommandeService.getAllLigneCommandes();
     }
@@ -28,7 +28,7 @@ public class LigneCommandeController {
         return ResponseEntity.ok().body(ligneCommande);
     }
 
-    @PostMapping("")
+    @PostMapping("/ajout")
     public LigneCommande createLigneCommande(@RequestBody LigneCommande ligneCommande) {
         return ligneCommandeService.createLigneCommande(ligneCommande);
     }

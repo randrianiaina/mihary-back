@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +28,10 @@ public class ApprovisionnementController {
     @GetMapping("/liste")
     public List<Object[]> getAllApprovisionnementsWithProductName() {
         return approvisionnementService.getAllApprovisionnementsWithProductName();
+    }
+    @GetMapping("/liste/{userId}/{productId}")
+    public List<Approvisionnement> getAllApprovisionnementsWithProductIdAndUserId(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "productId") Long productId) {
+        return approvisionnementService.getAllApprovisionnementsWithProductIdAndUserId(userId, productId);
     }
     @GetMapping("/agriculteur/{id}")
     public ResponseEntity<List<Object[]>> getAllApprovisionnementsWithUtilisateurId(@PathVariable(value = "id") Integer userId) {

@@ -64,7 +64,7 @@ import java.util.List;
         private String statutCompteCoop;
 
         @Column(length = 12)
-        private Long cinAgriculeur;
+        private Long cinAgriculteur;
 
         @ManyToOne(fetch = FetchType.LAZY)
         @org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)

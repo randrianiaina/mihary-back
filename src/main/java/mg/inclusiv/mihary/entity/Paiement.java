@@ -33,5 +33,15 @@ public class Paiement {
     @Column(name = "datePaiement")
     private LocalDate datePaiement;
 
+    private String chargeId;
+
+    public String getChargeId() {
+        return chargeId;
+    }
+
+    public void setChargeId(String chargeId) {
+        this.chargeId = chargeId;
+    }
+
     // Getters et setters
 }

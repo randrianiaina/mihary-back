@@ -34,6 +34,7 @@ public class CommandeController {
     @PostMapping("/ajout")
     public ResponseEntity<Commande> createCommande(@Valid @RequestBody Commande commande) {
         Commande newCommande = commandeService.createCommande(commande);
+        System.out.println(newCommande.getUtilisateur());
         return ResponseEntity.ok(newCommande);
     }
 

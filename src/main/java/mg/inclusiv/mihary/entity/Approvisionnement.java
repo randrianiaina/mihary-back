@@ -39,5 +39,7 @@ public class Approvisionnement {
     @Column(name="dateApprovisionnement", nullable=false)
     private LocalDate dateApprovisionnement;
 
-    // Getters et setters
+
+    @Column(name="statutPaiement", nullable=false, columnDefinition = "varchar(255) default 'non payé'")
+    private String statutPaiement;
 }
