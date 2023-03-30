@@ -40,6 +40,12 @@ public interface ApprovisionnementRepository extends JpaRepository<Approvisionne
             "WHERE u.id = :userId AND a.dateApprovisionnement = :dateApprovisionnement")
     List<Object[]> getAllApprovisionnementsWithProductNameByUserIdAndDate(@Param("userId") Integer userId, @Param("dateApprovisionnement") LocalDate dateApprovisionnement);
 
+    @Query("SELECT a.quantiteApprovisionnement, a.dateApprovisionnement, a.prixUnitaire, u.nomUtilisateur, p.nomProduit " +
+            "FROM Approvisionnement a " +
+            "INNER JOIN a.utilisateur u " +
+            "INNER JOIN a.produit p " +
+            "WHERE u.id = :userId AND a.dateApprovisionnement BETWEEN :startDate AND :endDate")
+    List<Object[]> getAllApprovisionnementsWithProductNameByUserIdAndDateInter(@Param("userId") Integer userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
 
     List<Approvisionnement> findByUtilisateur(Utilisateur utilisateur);
