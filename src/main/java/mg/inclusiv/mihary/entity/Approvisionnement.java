@@ -42,5 +42,4 @@ public class Approvisionnement {
 
     @Column(name="statutPaiement", nullable=false, columnDefinition = "varchar(255) default 'non payé'")
     private String statutPaiement;
-    // Getters et setters
 }
