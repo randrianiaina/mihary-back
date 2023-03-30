@@ -47,4 +47,7 @@ public class CommandeService {
     public List<Object[]> getCommandeDetails(Integer userId, Long produitId) {
         return commandeRepository.findCommandeDetails(userId, produitId);
     }
+    public List<Object[]> getCommandeDetailsByIdCoop(Integer userId) {
+        return commandeRepository.findCommandeDetailsByIdCoop(userId);
+    }
 }

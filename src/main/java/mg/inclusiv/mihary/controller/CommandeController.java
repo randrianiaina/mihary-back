@@ -29,6 +29,15 @@ public class CommandeController {
         List<Object[]> commandeDetails = commandeService.getCommandeDetails(userId, produitId);
         return ResponseEntity.ok(commandeDetails);
     }
+    @GetMapping("details/{userId}")
+    public ResponseEntity<List<Object[]>> getCommandeDetailsByIdCoop(
+            @PathVariable Integer userId
+
+    ) {
+        List<Object[]> commandeDetails = commandeService.getCommandeDetailsByIdCoop(userId);
+        return ResponseEntity.ok(commandeDetails);
+    }
+
 
 
     @PostMapping("/ajout")
