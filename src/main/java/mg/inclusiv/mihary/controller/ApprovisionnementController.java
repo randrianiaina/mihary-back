@@ -60,7 +60,7 @@ public class ApprovisionnementController {
         return approvisionnementService.saveApprovisionnement(approvisionnement);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}")
     public ResponseEntity<Approvisionnement> updateApprovisionnement(@PathVariable(value = "id") Long id,
                                                                      @Valid @RequestBody Approvisionnement approvisionnementDetails) throws ResourceNotFoundException {
         Approvisionnement updatedApprovisionnement = approvisionnementService.updateApprovisionnement(id, approvisionnementDetails);

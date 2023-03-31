@@ -66,7 +66,7 @@ public class ApprovisionnementService {
         approvisionnement.setPrixUnitaire(approvisionnementDetails.getPrixUnitaire());
         approvisionnement.setDateApprovisionnement(approvisionnementDetails.getDateApprovisionnement());
         approvisionnement.setUtilisateur(approvisionnementDetails.getUtilisateur());
-
+        approvisionnement.setStatutPaiement(approvisionnementDetails.getStatutPaiement());
         return approvisionnementRepository.save(approvisionnement);
     }
 
