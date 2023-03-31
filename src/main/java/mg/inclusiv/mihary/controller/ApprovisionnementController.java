@@ -57,6 +57,7 @@ public class ApprovisionnementController {
     }
     @PostMapping("/add")
     public Approvisionnement createApprovisionnement(@Valid @RequestBody Approvisionnement approvisionnement) {
+        approvisionnement.setStatutPaiement("non payé");
         return approvisionnementService.saveApprovisionnement(approvisionnement);
     }
 
