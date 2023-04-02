@@ -62,6 +62,10 @@ public class ProduitController {
     public List<Produit> getProduitsByReference(@PathVariable(value = "reference") Integer reference) throws ResourceNotFoundException {
         return produitService.findProduitsByReference(reference);
     }
+    @GetMapping("/cooperative/{reference}")
+    public List<Produit> findAllByCooperativeId(@PathVariable(value = "reference") Integer reference) throws ResourceNotFoundException {
+        return produitService.findAllByCooperativeId(reference);
+    }
 
     @GetMapping("/count")
     public Long getProductsCount() {

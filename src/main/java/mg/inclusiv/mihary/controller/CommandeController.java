@@ -37,6 +37,14 @@ public class CommandeController {
         List<Object[]> commandeDetails = commandeService.getCommandeDetailsByIdCoop(userId);
         return ResponseEntity.ok(commandeDetails);
     }
+    @GetMapping("nombre/{userId}")
+    public ResponseEntity<List<Object[]>> findNombreCommande(
+            @PathVariable Integer userId
+
+    ) {
+        List<Object[]> commandeDetails = commandeService.findNombreCommande(userId);
+        return ResponseEntity.ok(commandeDetails);
+    }
 
 
 
