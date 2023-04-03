@@ -50,4 +50,7 @@ public class CommandeService {
     public List<Object[]> getCommandeDetailsByIdCoop(Integer userId) {
         return commandeRepository.findCommandeDetailsByIdCoop(userId);
     }
+    public List<Object[]> findNombreCommande(Integer userId) {
+        return commandeRepository.findNombreCommande(userId);
+    }
 }

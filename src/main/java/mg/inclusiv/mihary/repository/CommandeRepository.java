@@ -26,4 +26,12 @@ public interface CommandeRepository extends JpaRepository<Commande,Long> {
             + "JOIN Utilisateur cl ON c.utilisateur.id = cl.id "
             + "WHERE c.statutCommande = 'traité' AND u.id = :userId")
     List<Object[]> findCommandeDetailsByIdCoop(@Param("userId") Integer userId);
+    @Query("SELECT DISTINCT c.idCommande "
+            + "FROM Commande c "
+            + "JOIN LigneCommande lc ON c.idCommande = lc.commande.idCommande "
+            + "JOIN Produit p ON lc.produit.idProduit = p.idProduit "
+            + "JOIN Utilisateur u ON p.referenceProduit = u.id "
+            + "JOIN Utilisateur cl ON c.utilisateur.id = cl.id "
+            + "WHERE c.statutCommande = 'traité' AND u.id = :userId")
+    List<Object[]> findNombreCommande(@Param("userId") Integer userId);
 }

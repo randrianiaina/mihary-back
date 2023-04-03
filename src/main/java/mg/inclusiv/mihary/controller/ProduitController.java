@@ -1,11 +1,5 @@
 package mg.inclusiv.mihary.controller;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import mg.inclusiv.mihary.entity.Produit;
 import mg.inclusiv.mihary.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -61,6 +59,10 @@ public class ProduitController {
     @GetMapping("/reference/{reference}")
     public List<Produit> getProduitsByReference(@PathVariable(value = "reference") Integer reference) throws ResourceNotFoundException {
         return produitService.findProduitsByReference(reference);
+    }
+    @GetMapping("/cooperative/{reference}")
+    public List<Produit> findAllByCooperativeId(@PathVariable(value = "reference") Integer reference) throws ResourceNotFoundException {
+        return produitService.findAllByCooperativeId(reference);
     }
 
     @GetMapping("/count")

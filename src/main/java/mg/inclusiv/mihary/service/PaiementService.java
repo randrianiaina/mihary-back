@@ -27,7 +27,7 @@ public class PaiementService {
         Paiement nouveauPaiement = paiementRepository.save(paiement);
         Stripe.apiKey="sk_test_51MqBM9AD78j1yqjL9qIU7ENwKYw5A9wuVgFKwlGAmjZaUNoNf0AjlBECN5IR4mXlZAgWSUWOafTOl8MIXBv7UN3V00L6fN9uWK";
         Map<String,Object> params= new HashMap<>();
-        params.put("amount", paiement.getMontantPaiement());
+        params.put("amount", paiement.getMontantPaiement().intValue());
         params.put("currency", "mga");
         params.put("description","achat de produits agricoles");
         params.put("source","tok_visa");
@@ -39,6 +39,7 @@ public class PaiementService {
             return paiement;
         } catch (StripeException e) {
         // gestion d'erreur ici
+            System.out.println(e);
             return null;
         }
     }

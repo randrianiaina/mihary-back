@@ -49,10 +49,10 @@ import java.util.List;
         private byte[] photoUtilisateur;
 
         @Column(length = 10)
-        private Long nifCoop;
+        private String nifCoop;
 
-        @Column(length = 17)
-        private Long statCoop;
+        @Column(length = 21)
+        private String statCoop;
 
         @Column(length = 20)
         private String telephoneUtilisateur;
@@ -63,8 +63,8 @@ import java.util.List;
         @Column(length = 50)
         private String statutCompteCoop;
 
-        @Column(length = 12)
-        private Long cinAgriculteur;
+        @Column(length = 15)
+        private String cinAgriculteur;
 
         @ManyToOne(fetch = FetchType.LAZY)
         @org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)

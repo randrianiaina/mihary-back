@@ -29,6 +29,10 @@ public class ProduitService {
     public List<Produit> findProduitsByReference(Integer reference) {
         return produitRepository.findByReferenceProduit(reference);
     }
+    public List<Produit> findAllByCooperativeId(Integer reference) {
+        return produitRepository.findAllByCooperativeId(reference);
+    }
+
 
     public Produit addProduit(Produit produit) {
         return produitRepository.save(produit);
